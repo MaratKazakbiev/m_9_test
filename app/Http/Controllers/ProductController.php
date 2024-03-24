@@ -87,11 +87,26 @@ class ProductController extends Controller
                 'page' => ['required', 'integer'],
             ]);
             $page = $validated['page'];
-            $products = Product::offset(($page-1)*5)->limit(5)->get();
+            $limit = Product::count();
+            $products = Product::offset(($page-1)*10)->limit(10)->get();
             return $products;
 
         }catch(Exception $error){
             return self::send_error($error->getMessage());
         }
     }
+
+    public function get_limit(Request $request){
+        try{
+            $limit = Product::count();
+            $limit = ceil($limit/10);
+            return $limit;
+
+        }catch(Exception $error){
+            return self::send_error($error->getMessage());
+        }
+    }
+
 }
+
+

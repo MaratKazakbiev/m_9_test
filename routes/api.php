@@ -13,4 +13,5 @@ Route::prefix('product')->group(function(){
 });
 
 Route::get('/products', [ProductController::class, 'get_products']);
+Route::get('/products/limit', [ProductController::class, 'get_limit']);
 
